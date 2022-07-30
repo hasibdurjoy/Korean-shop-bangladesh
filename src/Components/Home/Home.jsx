@@ -3,6 +3,7 @@ import BestSelling from "./Carousel/BestSelling";
 import FeaturedProducts from "./Carousel/FeaturedProducts";
 import MagnifierOfferCarousel from "./Carousel/MagnifierOfferCarousel";
 import MainBanner from "./Carousel/MainBanner";
+import TopTenSection from "./TopTenSection/TopTenSection";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <MagnifierOfferCarousel />
       <FeaturedProducts />
       <BestSelling />
+      <TopTenSection />
     </div>
   );
 };

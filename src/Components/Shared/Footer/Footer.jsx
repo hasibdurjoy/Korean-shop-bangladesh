@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, TextField } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField } from "@mui/material";
 import { Container } from "@mui/system";
 import {
   FileText,
@@ -8,41 +8,63 @@ import {
 } from "phosphor-react";
 import React from "react";
 import useStyles from "./Footer.style";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   return (
     <div style={{ borderTop: "1px solid black" }}>
       <div>
         <div style={{ marginBottom: "30px" }}>
-          <Container>
-            <Grid container spacing={0}>
+          <Box style={{ width: "80%" }} sx={{ mx: "auto" }}>
+            <Grid container spacing={1}>
               <Grid item xs={12} md={3}>
-                <Paper className={classes.footerIcon}>
+                <Paper
+                  className={classes.footerIcon}
+                  onClick={() => {
+                    navigate("/terms");
+                  }}
+                >
                   <FileText size={45} style={{ color: "#e85d04" }} />
-                  <p>Terms & Conditions</p>
+                  <h5>Terms & Conditions</h5>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={3}>
-                <Paper className={classes.footerIcon}>
+                <Paper
+                  className={classes.footerIcon}
+                  onClick={() => {
+                    navigate("/return-policy");
+                  }}
+                >
                   <ArrowBendUpLeft size={45} style={{ color: "#e85d04" }} />
-                  <p>Return Policy</p>
+                  <h5>Return Policy</h5>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={3}>
-                <Paper className={classes.footerIcon}>
+                <Paper
+                  className={classes.footerIcon}
+                  onClick={() => {
+                    navigate("/support-policy");
+                  }}
+                >
                   <PlusCircle size={45} style={{ color: "#e85d04" }} />
-                  <p>Support Policy</p>
+                  <h5>Support Policy</h5>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={3}>
-                <Paper className={classes.footerIcon}>
+                <Paper
+                  className={classes.footerIcon}
+                  onClick={() => {
+                    navigate("/privacy-policy");
+                  }}
+                >
                   <WarningCircle size={45} style={{ color: "#e85d04" }} />
-                  <p>Privacy Policy</p>
+                  <h5>Privacy Policy</h5>
                 </Paper>
               </Grid>
             </Grid>
-          </Container>
+          </Box>
         </div>
       </div>
       <div>
@@ -53,9 +75,13 @@ const Footer = () => {
             paddingBottom: "40px",
           }}
         >
-          <Container sx={{ mx: 10 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
+          <Box sx={{ width: "80%", mx: "auto" }}>
+            <Grid
+              container
+              spacing={3}
+              style={{ justifyContent: "space-between" }}
+            >
+              <Grid item xs={12} md={6}>
                 <img
                   src="https://magnificmart.com/public/uploads/all/Yf9Ke2EnaaLgj4iDXiJOLvXers8t2rE4hb54fhdx.png"
                   alt=""
@@ -95,7 +121,7 @@ const Footer = () => {
                 <p>Email:</p>
                 <p>support@magnificmart.com</p>
               </Grid>
-              <Grid item xs={12} md={4}>
+              <Grid item xs={12} md={2}>
                 <h3>MY ACCOUNT</h3>
                 <p>Login</p>
                 <p>Order History</p>
@@ -103,7 +129,7 @@ const Footer = () => {
                 <p>Track Order</p>
               </Grid>
             </Grid>
-          </Container>
+          </Box>
         </div>
       </div>
     </div>

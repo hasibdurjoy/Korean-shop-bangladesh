@@ -10,7 +10,7 @@ const BestSelling = () => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 5,
       slidesToSlide: 2, // optional, default to 1.
     },
     tablet: {
@@ -106,9 +106,7 @@ const BestSelling = () => {
               gap: "50px",
             }}
           >
-            <h3 style={{ borderBottom: "5px solid #e85d04" }}>
-              Featured Products
-            </h3>
+            <h3 style={{ borderBottom: "5px solid #e85d04" }}>Best Selling</h3>
           </div>
           <div>
             <Button variant="contained" style={{ backgroundColor: "#e85d04" }}>
