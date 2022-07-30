@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";

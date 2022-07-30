@@ -1,8 +1,5 @@
-import { Box, Button, Container, Grid, Paper } from "@mui/material";
+import { Box, Button, Grid, Paper } from "@mui/material";
 import React from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import StarRatings from "react-star-ratings";
 import useStyles from "./TopTenSection.style";
 
 const TopTenSection = () => {

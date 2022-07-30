@@ -1,4 +1,4 @@
-import { Box, Button, Container, Paper } from "@mui/material";
+import { Box, Button, Paper } from "@mui/material";
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -6,6 +6,7 @@ import StarRatings from "react-star-ratings";
 import useStyles from "./MagnifierFeaturedTopRatedCarousel.style";
 
 const MagnifierOfferCarousel = () => {
+  const classes = useStyles();
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -96,7 +97,6 @@ const MagnifierOfferCarousel = () => {
   const minutes = 59;
   const seconds = 50;
 
-  const [paused, setPaused] = React.useState(false);
   const [over, setOver] = React.useState(false);
   const [time, setTime] = React.useState({
     hours: parseInt(hours),
@@ -105,16 +105,16 @@ const MagnifierOfferCarousel = () => {
   });
 
   const tick = () => {
-    if (paused || over) return;
-    if (time.hours == 0 && time.minutes == 0 && time.seconds == 0)
+    if (over) return;
+    if (time.hours === 0 && time.minutes === 0 && time.seconds === 0)
       setOver(true);
-    else if (time.minutes == 0 && time.seconds == 0)
+    else if (time.minutes === 0 && time.seconds === 0)
       setTime({
         hours: time.hours - 1,
         minutes: 59,
         seconds: 59,
       });
-    else if (time.seconds == 0)
+    else if (time.seconds === 0)
       setTime({
         hours: time.hours,
         minutes: time.minutes - 1,
@@ -128,27 +128,12 @@ const MagnifierOfferCarousel = () => {
       });
   };
 
-  const reset = () => {
-    setTime({
-      hours: parseInt(hours),
-      minutes: parseInt(minutes),
-      seconds: parseInt(seconds),
-    });
-    setPaused(false);
-    setOver(false);
-  };
-
   React.useEffect(() => {
     let timerID = setInterval(() => tick(), 1000);
     return () => clearInterval(timerID);
   });
 
   const time2 = new Date();
-  const time3 = new Date(
-    "Sat Jul 30 2022 17:03:19 GMT+0600 (Bangladesh Standard Time)"
-  );
-
-  const classes = useStyles();
 
   return (
     <Box
@@ -189,7 +174,7 @@ const MagnifierOfferCarousel = () => {
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
           infinite={true}
-          // autoPlay={this.props.deviceType !== "mobile" ? true : false}
+          // autoPlay={this.props.deviceType !=== "mobile" ? true : false}
           autoPlay={true}
           autoPlaySpeed={3000}
           keyBoardControl={true}

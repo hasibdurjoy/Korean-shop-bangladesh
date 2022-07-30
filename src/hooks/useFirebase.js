@@ -44,7 +44,6 @@ const useFirebase = () => {
         navigate("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
         setAuthError(error.message);
         // ..
       })
