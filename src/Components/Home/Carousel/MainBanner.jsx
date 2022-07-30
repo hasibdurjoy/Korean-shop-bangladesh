@@ -1,15 +1,9 @@
 import React from "react";
-import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import SwipeableViews from "react-swipeable-views";
-import { autoPlay } from "react-swipeable-views-utils";
 import { Grid, Paper } from "@mui/material";
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const images = [
   {
@@ -64,86 +58,58 @@ const fakeData = [
 ];
 
 const MainBanner = () => {
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = images.length;
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
   };
 
   return (
     <Box sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2 }}>
       <Grid container spacing={2}>
         <Grid item xs={10}>
-          <div>
-            <AutoPlaySwipeableViews
-              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-              index={activeStep}
-              onChangeIndex={handleStepChange}
-              enableMouseEvents
-            >
-              {images.map((step, index) => (
-                <div key={step.label}>
-                  {Math.abs(activeStep - index) <= 2 ? (
-                    <Box
-                      component="img"
-                      sx={{
-                        height: "70vh",
-                        display: "block",
-                        maxWidth: "100%",
-                        overflow: "hidden",
-                        width: "100%",
-                        mx: "auto",
-                      }}
-                      src={step.imgPath}
-                    />
-                  ) : null}
-                </div>
-              ))}
-            </AutoPlaySwipeableViews>
-            <MobileStepper
-              steps={maxSteps}
-              position="static"
-              activeStep={activeStep}
-              nextButton={
-                <Button
-                  size="small"
-                  onClick={handleNext}
-                  disabled={activeStep === maxSteps - 1}
-                >
-                  Next
-                  {theme.direction === "rtl" ? (
-                    <KeyboardArrowLeft />
-                  ) : (
-                    <KeyboardArrowRight />
-                  )}
-                </Button>
-              }
-              backButton={
-                <Button
-                  size="small"
-                  onClick={handleBack}
-                  disabled={activeStep === 0}
-                >
-                  {theme.direction === "rtl" ? (
-                    <KeyboardArrowRight />
-                  ) : (
-                    <KeyboardArrowLeft />
-                  )}
-                  Back
-                </Button>
-              }
-            />
-          </div>
+          <Carousel
+            swipeable={false}
+            draggable={false}
+            showDots={true}
+            responsive={responsive}
+            ssr={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={3000}
+            keyBoardControl={true}
+            customTransition="all .5"
+            transitionDuration={2000}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={["tablet", "mobile"]}
+            // deviceType={this.props.deviceType}
+            dotListClass="custom-dot-list-style"
+            itemClass="carousel-item-padding-40-px"
+          >
+            {images.map((image) => {
+              return (
+                <>
+                  <img
+                    src={image.imgPath}
+                    alt=""
+                    style={{ width: "100%", height: "70vh" }}
+                  />
+                </>
+              );
+            })}
+          </Carousel>
         </Grid>
         <Grid item xs={2}>
           <Paper
@@ -196,7 +162,20 @@ const MainBanner = () => {
                           borderRadius: "20px",
                         }}
                       />
-                      <h4>Tk. {data.price}</h4>
+                      {data.discountPrice && (
+                        <h4 style={{ color: "red" }}>
+                          Tk. {data.discountPrice}
+                        </h4>
+                      )}
+                      <h4
+                        style={{
+                          textDecoration: data.discountPrice
+                            ? "line-through"
+                            : "",
+                        }}
+                      >
+                        Tk. {data.price}
+                      </h4>
                     </Paper>
                   </>
                 );

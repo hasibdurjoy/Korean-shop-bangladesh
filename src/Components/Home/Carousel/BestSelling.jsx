@@ -5,7 +5,8 @@ import "react-multi-carousel/lib/styles.css";
 import StarRatings from "react-star-ratings";
 import useStyles from "./MagnifierFeaturedTopRatedCarousel.style";
 
-const MagnifierOfferCarousel = () => {
+const BestSelling = () => {
+  const classes = useStyles();
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -92,64 +93,6 @@ const MagnifierOfferCarousel = () => {
     },
   ];
 
-  const hours = 1;
-  const minutes = 59;
-  const seconds = 50;
-
-  const [paused, setPaused] = React.useState(false);
-  const [over, setOver] = React.useState(false);
-  const [time, setTime] = React.useState({
-    hours: parseInt(hours),
-    minutes: parseInt(minutes),
-    seconds: parseInt(seconds),
-  });
-
-  const tick = () => {
-    if (paused || over) return;
-    if (time.hours == 0 && time.minutes == 0 && time.seconds == 0)
-      setOver(true);
-    else if (time.minutes == 0 && time.seconds == 0)
-      setTime({
-        hours: time.hours - 1,
-        minutes: 59,
-        seconds: 59,
-      });
-    else if (time.seconds == 0)
-      setTime({
-        hours: time.hours,
-        minutes: time.minutes - 1,
-        seconds: 59,
-      });
-    else
-      setTime({
-        hours: time.hours,
-        minutes: time.minutes,
-        seconds: time.seconds - 1,
-      });
-  };
-
-  const reset = () => {
-    setTime({
-      hours: parseInt(hours),
-      minutes: parseInt(minutes),
-      seconds: parseInt(seconds),
-    });
-    setPaused(false);
-    setOver(false);
-  };
-
-  React.useEffect(() => {
-    let timerID = setInterval(() => tick(), 1000);
-    return () => clearInterval(timerID);
-  });
-
-  const time2 = new Date();
-  const time3 = new Date(
-    "Sat Jul 30 2022 17:03:19 GMT+0600 (Bangladesh Standard Time)"
-  );
-
-  const classes = useStyles();
-
   return (
     <Box
       className={classes.root}
@@ -164,27 +107,18 @@ const MagnifierOfferCarousel = () => {
             }}
           >
             <h3 style={{ borderBottom: "5px solid #e85d04" }}>
-              Magnific Offer
+              Featured Products
             </h3>
-            <div className={classes.displayFlex}>
-              {/* <p>{`${time.hours.toString().padStart(2, "0")}:${time.minutes
-              .toString()
-              .padStart(2, "0")}:${time.seconds
-              .toString()
-              .padStart(2, "0")}`}</p>
-            <div>{over ? "Time's up!" : ""}</div> */}
-              <h4>{time2.toLocaleTimeString()}</h4>
-            </div>
           </div>
           <div>
             <Button variant="contained" style={{ backgroundColor: "#e85d04" }}>
-              View More
+              View All Products
             </Button>
           </div>
         </div>
         <Carousel
-          swipeable={true}
-          draggable={true}
+          swipeable={false}
+          draggable={false}
           showDots={false}
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
@@ -259,4 +193,4 @@ const MagnifierOfferCarousel = () => {
   );
 };
 
-export default MagnifierOfferCarousel;
+export default BestSelling;
