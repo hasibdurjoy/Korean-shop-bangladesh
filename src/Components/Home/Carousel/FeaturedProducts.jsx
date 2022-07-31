@@ -6,9 +6,11 @@ import StarRatings from "react-star-ratings";
 import { getFunction } from "../../../Api/CallApis";
 import Responsive from "./CarouselResponsive";
 import useStyles from "./MagnifierFeaturedTopRatedCarousel.style";
+import { useNavigate } from "react-router-dom";
 
 const FeaturedProducts = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [featuredProducts, setFeaturedProducts] = useState([]);
 
   const getFeaturedProducts = async () => {
@@ -69,7 +71,13 @@ const FeaturedProducts = () => {
           {featuredProducts.map((data) => {
             return (
               <>
-                <Paper key={data.id} className={classes.productCardRoot}>
+                <Paper
+                  key={data.id}
+                  className={classes.productCardRoot}
+                  onClick={() => {
+                    navigate(`/product/${data.id}`);
+                  }}
+                >
                   <div className={classes.offCardRoot}>
                     OFF
                     <span className={classes.offPercentButton}>

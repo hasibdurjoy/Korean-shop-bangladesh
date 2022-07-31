@@ -6,9 +6,11 @@ import StarRatings from "react-star-ratings";
 import { getFunction } from "../../../Api/CallApis";
 import Responsive from "./CarouselResponsive";
 import useStyles from "./MagnifierFeaturedTopRatedCarousel.style";
+import { useNavigate } from "react-router-dom";
 
 const BestSelling = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [bestSellingOffer, setBestSellingOffer] = useState([]);
 
   const getOfferProduct = async () => {
@@ -67,7 +69,13 @@ const BestSelling = () => {
           {bestSellingOffer.map((data) => {
             return (
               <>
-                <Paper key={data.id} className={classes.productCardRoot}>
+                <Paper
+                  key={data.id}
+                  className={classes.productCardRoot}
+                  onClick={() => {
+                    navigate(`/product/${data.id}`);
+                  }}
+                >
                   <div className={classes.offCardRoot}>
                     OFF
                     <span className={classes.offPercentButton}>
