@@ -31,7 +31,7 @@ const BestSelling = () => {
       className={classes.root}
       sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
     >
-      <Paper sx={{ p: 3, borderRadius: "20px" }}>
+      <Paper sx={{ p: 3, borderRadius: "20px" }} elevation={24}>
         <div className={classes.carouselTop}>
           <div
             className={classes.displayFlex}
@@ -75,6 +75,8 @@ const BestSelling = () => {
                   onClick={() => {
                     navigate(`/product/${data.id}`);
                   }}
+                  elevation={10}
+                  variant="outlined"
                 >
                   <div className={classes.offCardRoot}>
                     OFF

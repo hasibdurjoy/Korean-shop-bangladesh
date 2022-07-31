@@ -24,6 +24,7 @@ const Footer = () => {
                   onClick={() => {
                     navigate("/terms");
                   }}
+                  variant="outlined"
                 >
                   <FileText size={45} style={{ color: "#e85d04" }} />
                   <h5>Terms & Conditions</h5>
@@ -35,6 +36,7 @@ const Footer = () => {
                   onClick={() => {
                     navigate("/return-policy");
                   }}
+                  variant="outlined"
                 >
                   <ArrowBendUpLeft size={45} style={{ color: "#e85d04" }} />
                   <h5>Return Policy</h5>
@@ -46,6 +48,7 @@ const Footer = () => {
                   onClick={() => {
                     navigate("/support-policy");
                   }}
+                  variant="outlined"
                 >
                   <PlusCircle size={45} style={{ color: "#e85d04" }} />
                   <h5>Support Policy</h5>
@@ -57,6 +60,7 @@ const Footer = () => {
                   onClick={() => {
                     navigate("/privacy-policy");
                   }}
+                  variant="outlined"
                 >
                   <WarningCircle size={45} style={{ color: "#e85d04" }} />
                   <h5>Privacy Policy</h5>

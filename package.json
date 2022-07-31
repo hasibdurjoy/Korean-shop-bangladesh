@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "feather-icons": "^4.29.0",
     "firebase": "^9.9.1",
+    "mui-navbar": "^1.0.4",
     "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,6 +24,7 @@
     "react-scripts": "5.0.1",
     "react-star-ratings": "^2.3.0",
     "react-swipeable-views": "^0.14.0",
+    "react-tabs": "^5.1.0",
     "sweetalert2": "^11.4.24",
     "web-vitals": "^2.1.4"
   },

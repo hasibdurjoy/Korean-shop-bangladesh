@@ -105,8 +105,9 @@ const TopTenSection = () => {
                         display: "flex",
                         alignItems: "center",
                         gap: "20px",
-                        padding: "5px",
+                        padding: "5px 10px",
                       }}
+                      elevation={5}
                     >
                       <img
                         src={data.img}
@@ -150,8 +151,9 @@ const TopTenSection = () => {
                         display: "flex",
                         alignItems: "center",
                         gap: "20px",
-                        padding: "5px",
+                        padding: "5px 10px",
                       }}
+                      elevation={5}
                     >
                       <img
                         src={data.img}
