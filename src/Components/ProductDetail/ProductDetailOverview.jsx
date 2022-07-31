@@ -47,7 +47,11 @@ const ProductDetailOverview = () => {
             </div>
             <p>Estimate Shipping Time: 7 Days</p>
             <hr />
-            <Grid container spacing={1}>
+            <Grid
+              container
+              spacing={1}
+              style={{ alignItems: "center", marginTop: "10px" }}
+            >
               <Grid item xs={3} md={3}>
                 <p>Sold By :</p>
               </Grid>
@@ -55,7 +59,12 @@ const ProductDetailOverview = () => {
                 <h3 style={{ textAlign: "start" }}>Company name</h3>
               </Grid>
             </Grid>
-            <Grid container spacing={1}>
+            <hr />
+            <Grid
+              container
+              spacing={1}
+              style={{ alignItems: "center", marginTop: "10px" }}
+            >
               <Grid item xs={3} md={3}>
                 <p>Price :</p>
               </Grid>
@@ -67,18 +76,28 @@ const ProductDetailOverview = () => {
                 </h4>
               </Grid>
             </Grid>
-            <Grid container spacing={1}>
+            <Grid
+              container
+              spacing={1}
+              style={{ alignItems: "center", marginTop: "10px" }}
+            >
               <Grid item xs={3} md={3}>
                 <p>Discount Price :</p>
               </Grid>
               <Grid item xs={9} md={9}>
-                <h2>
+                <h2 style={{ color: "#e85d04" }}>
                   {product.discountPrice}{" "}
-                  <span style={{ fontSize: "20px" }}>/{product.quantity}</span>
+                  <span style={{ fontSize: "20px", color: "black" }}>
+                    /{product.quantity}
+                  </span>
                 </h2>
               </Grid>
             </Grid>
-            <Grid container spacing={1}>
+            <Grid
+              container
+              spacing={1}
+              style={{ alignItems: "center", marginTop: "10px" }}
+            >
               <Grid item xs={3} md={3}>
                 <p>Quantity :</p>
               </Grid>
@@ -104,14 +123,41 @@ const ProductDetailOverview = () => {
                 </h4>
               </Grid>
             </Grid>
-            <Grid container spacing={1}>
+            <Grid
+              container
+              spacing={1}
+              style={{ alignItems: "center", marginTop: "10px" }}
+            >
               <Grid item xs={3} md={3}>
                 <p>Total :</p>
               </Grid>
               <Grid item xs={9} md={9}>
-                <h4>{product.discountPrice * quantity}</h4>
+                <h2 style={{ color: "#e85d04" }}>
+                  {product.discountPrice * quantity}
+                </h2>
               </Grid>
             </Grid>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "100px",
+                marginTop: "30px",
+              }}
+            >
+              <Button
+                variant="outlined"
+                style={{ borderColor: "#e85d04", color: "black" }}
+              >
+                Add To Cart
+              </Button>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#e85d04" }}
+              >
+                Buy Now
+              </Button>
+            </div>
           </Grid>
         </Grid>
       </Paper>
