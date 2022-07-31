@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 8,
     "img": "https://magnificmart.com/public/uploads/all/325_01.jpg",
     "price": "450",
     "discountPrice": "350",
@@ -9,7 +9,7 @@
     "off": 20
   },
   {
-    "id": 2,
+    "id": 9,
     "img": "https://magnificmart.com/public/uploads/all/200_01.jpg",
     "price": "450",
     "discountPrice": "350",
@@ -18,7 +18,7 @@
     "off": 20
   },
   {
-    "id": 3,
+    "id": 10,
     "img": "https://magnificmart.com/public/uploads/all/065_01.jpg",
     "price": "450",
     "discountPrice": "350",
@@ -27,7 +27,7 @@
     "off": 20
   },
   {
-    "id": 4,
+    "id": 11,
     "img": "https://magnificmart.com/public/uploads/all/044_01.jpg",
     "price": "450",
     "discountPrice": "350",
@@ -36,7 +36,7 @@
     "off": 20
   },
   {
-    "id": 5,
+    "id": 12,
     "img": "https://magnificmart.com/public/uploads/all/031_01.jpg",
     "price": "450",
     "discountPrice": "350",
@@ -45,7 +45,7 @@
     "off": 20
   },
   {
-    "id": 6,
+    "id": 13,
     "img": "https://magnificmart.com/public/uploads/all/328_01.jpg",
     "price": "450",
     "discountPrice": "350",

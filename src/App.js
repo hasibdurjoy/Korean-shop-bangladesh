@@ -6,6 +6,7 @@ import PrivacyPolicy from "./Components/PolicyPages/PrivacyPolicy";
 import ReturnPolicy from "./Components/PolicyPages/ReturnPolicy";
 import SupportPolicy from "./Components/PolicyPages/SupportPolicy";
 import TermsAndConditions from "./Components/PolicyPages/TermsAndConditions";
+import ProductDetailOverview from "./Components/ProductDetail/ProductDetailOverview";
 import Footer from "./Components/Shared/Footer/Footer";
 import Header from "./Components/Shared/Header/Header";
 import AuthProvider from "./context/AuthProvider";
@@ -25,6 +26,10 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/product/:productId"
+              element={<ProductDetailOverview />}
+            />
           </Routes>
           <Footer />
         </Router>
