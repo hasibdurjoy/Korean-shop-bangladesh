@@ -1,97 +1,28 @@
 import { Box, Button, Paper } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import StarRatings from "react-star-ratings";
+import { getFunction } from "../../../Api/CallApis";
+import Responsive from "./CarouselResponsive";
 import useStyles from "./MagnifierFeaturedTopRatedCarousel.style";
 
 const BestSelling = () => {
   const classes = useStyles();
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-      slidesToSlide: 2, // optional, default to 1.
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 3,
-      slidesToSlide: 2, // optional, default to 1.
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1, // optional, default to 1.
-    },
+  const [bestSellingOffer, setBestSellingOffer] = useState([]);
+
+  const getOfferProduct = async () => {
+    try {
+      const offerData = await getFunction("./BestSelling.json");
+      setBestSellingOffer(offerData.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const fakeData = [
-    {
-      id: 1,
-      img: "https://magnificmart.com/public/uploads/all/260_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-    {
-      id: 2,
-      img: "https://magnificmart.com/public/uploads/all/266_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-    {
-      id: 3,
-      img: "https://magnificmart.com/public/uploads/all/265_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-    {
-      id: 4,
-      img: "https://magnificmart.com/public/uploads/all/264_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-    {
-      id: 5,
-      img: "https://magnificmart.com/public/uploads/all/263_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-
-    {
-      id: 6,
-      img: "https://magnificmart.com/public/uploads/all/267_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-
-    {
-      id: 7,
-      img: "https://magnificmart.com/public/uploads/all/267_01.jpg",
-      price: "450",
-      discountPrice: "350",
-      title: "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
-      rating: 5,
-      off: 20,
-    },
-  ];
+  useEffect(() => {
+    getOfferProduct();
+  }, []);
 
   return (
     <Box
@@ -115,25 +46,25 @@ const BestSelling = () => {
           </div>
         </div>
         <Carousel
-          swipeable={false}
-          draggable={false}
+          swipeable={true}
+          draggable={true}
           showDots={false}
-          responsive={responsive}
-          ssr={true} // means to render carousel on server-side.
+          responsive={Responsive}
+          ssr={true}
           infinite={true}
-          // autoPlay={this.props.deviceType !== "mobile" ? true : false}
           autoPlay={true}
           autoPlaySpeed={3000}
           keyBoardControl={true}
-          customTransition="all .5"
+          customTransition="transform 2000ms ease-in-out"
           transitionDuration={2000}
           containerClass="carousel-container"
           removeArrowOnDeviceType={["tablet", "mobile"]}
           // deviceType={this.props.deviceType}
           dotListClass="custom-dot-list-style"
           itemClass="carousel-item-padding-40-px"
+          partialVisible={true}
         >
-          {fakeData.map((data) => {
+          {bestSellingOffer.map((data) => {
             return (
               <>
                 <Paper key={data.id} className={classes.productCardRoot}>

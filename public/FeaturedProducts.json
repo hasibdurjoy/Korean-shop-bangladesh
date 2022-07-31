@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "img": "https://magnificmart.com/public/uploads/all/325_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  },
+  {
+    "id": 2,
+    "img": "https://magnificmart.com/public/uploads/all/200_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  },
+  {
+    "id": 3,
+    "img": "https://magnificmart.com/public/uploads/all/065_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  },
+  {
+    "id": 4,
+    "img": "https://magnificmart.com/public/uploads/all/044_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  },
+  {
+    "id": 5,
+    "img": "https://magnificmart.com/public/uploads/all/031_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  },
+  {
+    "id": 6,
+    "img": "https://magnificmart.com/public/uploads/all/328_01.jpg",
+    "price": "450",
+    "discountPrice": "350",
+    "title": "Technic 15 Color Eye Shadow Palette - Goddess - 30g",
+    "rating": 5,
+    "off": 20
+  }
+]

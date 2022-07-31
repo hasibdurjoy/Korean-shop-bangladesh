@@ -79,7 +79,7 @@ const MainBanner = () => {
   return (
     <Box sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2 }}>
       <Grid container spacing={2}>
-        <Grid item xs={10}>
+        <Grid item xs={12} md={10}>
           <Carousel
             swipeable={false}
             draggable={false}
@@ -90,7 +90,7 @@ const MainBanner = () => {
             autoPlay={true}
             autoPlaySpeed={3000}
             keyBoardControl={true}
-            customTransition="all .5"
+            customTransition="transform 2000ms ease-in-out"
             transitionDuration={2000}
             containerClass="carousel-container"
             removeArrowOnDeviceType={["tablet", "mobile"]}
@@ -111,7 +111,7 @@ const MainBanner = () => {
             })}
           </Carousel>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={12} md={2}>
           <Paper
             sx={{
               height: "70vh",
