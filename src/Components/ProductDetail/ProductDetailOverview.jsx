@@ -67,7 +67,7 @@ const ProductDetailOverview = () => {
     }
     setCart(newCart);
     // save to local storage (for now)
-    addToDb(product.title + product.id);
+    addToDb(product.id);
     handleHit();
   };
 
