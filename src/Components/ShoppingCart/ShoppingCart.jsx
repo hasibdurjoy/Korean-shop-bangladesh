@@ -7,7 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DataProvider } from "../../context/DataProvider";
 import GetAllProducts from "../../hooks/GetAllProducts";
 import useCart from "../../hooks/useCart";
 import { removeFromDb } from "../../Utilities/FakeDatabase";
@@ -15,22 +16,23 @@ import useStyles from "./ShoppingCart.style";
 
 const ShoppingCart = () => {
   const classes = useStyles();
+  const { handleHit } = useContext(DataProvider);
   const [AllProducts] = GetAllProducts();
   const [cart, setCart] = useCart(AllProducts);
-  const [subtotal, setSubtotal] = useCart(0);
+  const [subtotal, setSubtotal] = useState(0);
   // console.log(AllProducts, cart);
 
   const handleRemove = (id) => {
     const newCart = cart.filter((product) => product.id !== id);
     setCart(newCart);
     removeFromDb(id);
+    handleHit();
   };
   useEffect(() => {
     let sub = 0;
     cart.map((it) => {
       sub += it.discountPrice * it.orderQuantity;
     });
-    console.log(sub);
     setSubtotal(sub);
   }, [cart]);
 

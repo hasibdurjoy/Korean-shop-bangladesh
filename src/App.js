@@ -1,5 +1,5 @@
 import { Box, Modal, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login/Login";
@@ -15,22 +15,14 @@ import AuthProvider from "./context/AuthProvider";
 import { DataProvider } from "./context/DataProvider";
 
 function App() {
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
+  const [hitDb, setHitDb] = useState(0);
+  const handleHit = () => {
+    setHitDb(hitDb + 1);
   };
-  const data = "teste";
 
   return (
     <div>
-      <DataProvider.Provider value={{ data }}>
+      <DataProvider.Provider value={{ handleHit, hitDb }}>
         <AuthProvider>
           <Router>
             <Header />

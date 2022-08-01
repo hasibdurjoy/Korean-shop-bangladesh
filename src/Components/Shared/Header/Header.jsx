@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,14 +11,23 @@ import { Modal } from "@mui/material";
 import ShoppingCart from "../../ShoppingCart/ShoppingCart";
 import GetAllProducts from "../../../hooks/GetAllProducts";
 import useCart from "../../../hooks/useCart";
+import { DataProvider } from "../../../context/DataProvider";
 
 const Header = () => {
   const { user, logOut } = useAuth();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const { hitDb } = useContext(DataProvider);
 
   const [AllProducts] = GetAllProducts();
   const [cart, setCart] = useCart(AllProducts);
+  const obj = {};
+
+  useEffect(() => {
+    console.log("rerender");
+    const savedCart = localStorage.getItem("shopping_cart");
+    savedCart && console.log(savedCart, Object.keys(savedCart).length);
+  }, [hitDb]);
 
   return (
     <div>

@@ -21,7 +21,7 @@ const ProductDetailOverview = () => {
   const params = useParams();
   const navigate = useNavigate();
   //context
-  const { data } = useContext(DataProvider);
+  const { data, handleHit } = useContext(DataProvider);
 
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState([]);
@@ -55,7 +55,6 @@ const ProductDetailOverview = () => {
 
   const [cart, setCart] = useCart(product);
   const handleAddToCart = (product) => {
-    console.log(product);
     const exists = cart.find((pd) => pd.id === product.id);
     let newCart = [];
     if (exists) {
@@ -68,7 +67,8 @@ const ProductDetailOverview = () => {
     }
     setCart(newCart);
     // save to local storage (for now)
-    addToDb(product.id);
+    addToDb(product.title + product.id);
+    handleHit();
   };
 
   useEffect(() => {
@@ -237,9 +237,6 @@ const ProductDetailOverview = () => {
                 variant="outlined"
                 style={{ borderColor: "#e85d04", color: "black" }}
                 onClick={() => {
-                  console.log(product);
-                  console.log(quantity);
-                  // localStorage.setItem("id", product.id, "quantity", quantity);
                   handleAddToCart(product);
                 }}
               >
