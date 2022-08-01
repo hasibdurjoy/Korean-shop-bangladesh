@@ -9,11 +9,16 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import { Modal } from "@mui/material";
 import ShoppingCart from "../../ShoppingCart/ShoppingCart";
+import GetAllProducts from "../../../hooks/GetAllProducts";
+import useCart from "../../../hooks/useCart";
 
 const Header = () => {
   const { user, logOut } = useAuth();
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+
+  const [AllProducts] = GetAllProducts();
+  const [cart, setCart] = useCart(AllProducts);
 
   return (
     <div>
@@ -43,7 +48,9 @@ const Header = () => {
               }}
               style={{ textDecoration: "none", color: "white" }}
             >
-              <Button color="inherit">Cart</Button>
+              <Button color="inherit">
+                Cart <Button variant="contained">({cart?.length})</Button>
+              </Button>
             </div>
             {user?.email ? (
               <Box>

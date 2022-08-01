@@ -4,15 +4,16 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "370px",
     maxWidth: "450px",
     color: "#ffcc00",
-    backgroundColor: "red",
-    "& .MuiFormHelperText-root": {},
   },
   card: {
     borderRadius: "10px",
     color: "black",
+    backgroundColor: "black",
+    height: "80vh",
+    padding: "20px 0px",
+    overflowY: "auto",
   },
   cardContent: {
-    backgroundColor: "red",
     padding: "30px",
   },
 }));

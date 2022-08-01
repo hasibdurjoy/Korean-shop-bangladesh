@@ -22,7 +22,7 @@ const ProductDetailOverview = () => {
   const navigate = useNavigate();
   //context
   const { data } = useContext(DataProvider);
-  console.log(data);
+
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState([]);
   const [topTenProduct, setTopTenProduct] = useState([]);
@@ -60,10 +60,10 @@ const ProductDetailOverview = () => {
     let newCart = [];
     if (exists) {
       const rest = cart.filter((pd) => pd.id !== product.id);
-      exists.quantity = exists.quantity + 1;
+      exists.orderQuantity = exists.orderQuantity + 1;
       newCart = [...rest, product];
     } else {
-      product.quantity = 1;
+      product.orderQuantity = 1;
       newCart = [...cart, product];
     }
     setCart(newCart);
