@@ -16,6 +16,7 @@ import { DataProvider } from "../../../context/DataProvider";
 const Header = () => {
   const { user, logOut } = useAuth();
   const [open, setOpen] = useState(false);
+  const [itemInCart, setItemInCart] = useState(0);
   const handleClose = () => setOpen(false);
   const { hitDb } = useContext(DataProvider);
 
@@ -24,9 +25,8 @@ const Header = () => {
   const obj = {};
 
   useEffect(() => {
-    console.log("rerender");
     const savedCart = localStorage.getItem("shopping_cart");
-    savedCart && console.log(savedCart, Object.keys(savedCart).length);
+    savedCart && setItemInCart(Object.keys(JSON.parse(savedCart)).length);
   }, [hitDb]);
 
   return (
@@ -58,7 +58,10 @@ const Header = () => {
               style={{ textDecoration: "none", color: "white" }}
             >
               <Button color="inherit">
-                Cart <Button variant="contained">({cart?.length})</Button>
+                Cart{" "}
+                <Button variant="contained">
+                  ({itemInCart || cart?.length})
+                </Button>
               </Button>
             </div>
             {user?.email ? (
