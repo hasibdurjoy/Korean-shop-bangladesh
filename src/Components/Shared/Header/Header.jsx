@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,9 +7,13 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import { Modal } from "@mui/material";
+import ShoppingCart from "../../ShoppingCart/ShoppingCart";
 
 const Header = () => {
   const { user, logOut } = useAuth();
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
 
   return (
     <div>
@@ -32,12 +36,15 @@ const Header = () => {
               <Button color="inherit">Home</Button>
             </Link>
 
-            <Link
-              to="/appointment"
+            <div
+              // to="/appointment"
+              onClick={() => {
+                setOpen(true);
+              }}
               style={{ textDecoration: "none", color: "white" }}
             >
-              <Button color="inherit">Appointment</Button>
-            </Link>
+              <Button color="inherit">Cart</Button>
+            </div>
             {user?.email ? (
               <Box>
                 <NavLink
@@ -61,6 +68,21 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </Box>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ShoppingCart />
+        </Modal>
+      </div>
     </div>
   );
 };

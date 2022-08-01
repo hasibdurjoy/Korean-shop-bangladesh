@@ -8,16 +8,21 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 import { getFunction } from "../../Api/CallApis";
 import { useNavigate } from "react-router-dom";
+import { DataProvider } from "../../context/DataProvider";
+import useCart from "../../hooks/useCart";
+import { addToDb } from "../../Utilities/FakeDatabase";
 
 const ProductDetailOverview = () => {
   const params = useParams();
-  console.log(params);
   const navigate = useNavigate();
+  //context
+  const { data } = useContext(DataProvider);
+  console.log(data);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState([]);
   const [topTenProduct, setTopTenProduct] = useState([]);
@@ -46,6 +51,24 @@ const ProductDetailOverview = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const [cart, setCart] = useCart(product);
+  const handleAddToCart = (product) => {
+    console.log(product);
+    const exists = cart.find((pd) => pd.id === product.id);
+    let newCart = [];
+    if (exists) {
+      const rest = cart.filter((pd) => pd.id !== product.id);
+      exists.quantity = exists.quantity + 1;
+      newCart = [...rest, product];
+    } else {
+      product.quantity = 1;
+      newCart = [...cart, product];
+    }
+    setCart(newCart);
+    // save to local storage (for now)
+    addToDb(product.id);
   };
 
   useEffect(() => {
@@ -213,6 +236,12 @@ const ProductDetailOverview = () => {
               <Button
                 variant="outlined"
                 style={{ borderColor: "#e85d04", color: "black" }}
+                onClick={() => {
+                  console.log(product);
+                  console.log(quantity);
+                  // localStorage.setItem("id", product.id, "quantity", quantity);
+                  handleAddToCart(product);
+                }}
               >
                 Add To Cart
               </Button>
@@ -308,7 +337,6 @@ const ProductDetailOverview = () => {
               </TabPanel>
               <TabPanel value={value} index={1}>
                 {product?.review?.map((review) => {
-                  console.log(review);
                   return (
                     <Paper elevation={15} sx={{ p: 4, mb: 3 }}>
                       <h2>{review.name}</h2>
