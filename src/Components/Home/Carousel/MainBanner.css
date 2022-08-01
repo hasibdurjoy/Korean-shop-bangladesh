@@ -1,0 +1,13 @@
+
+.bannerImage{
+  width: 100%;
+  height: 70vh;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .bannerImage{
+    width: 100%;
+    height: 35vh;
+  }
+}

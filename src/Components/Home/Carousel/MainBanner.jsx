@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { Grid, Paper } from "@mui/material";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import "./MainBanner.css";
 
 const images = [
   {
@@ -104,7 +105,8 @@ const MainBanner = () => {
                   <img
                     src={image.imgPath}
                     alt=""
-                    style={{ width: "100%", height: "70vh" }}
+                    // style={{ width: "100%", height: "70vh" }}
+                    className="bannerImage"
                   />
                 </>
               );
