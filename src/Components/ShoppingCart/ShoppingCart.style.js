@@ -15,6 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   cardContent: {
     padding: "30px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    height: "80vh",
   },
 }));
 

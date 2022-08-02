@@ -1,26 +1,16 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Card, CardContent, Grid, Paper } from "@mui/material";
+import { X } from "phosphor-react";
 import React, { useContext, useEffect, useState } from "react";
 import { DataProvider } from "../../context/DataProvider";
-import GetAllProducts from "../../hooks/GetAllProducts";
 import useCart from "../../hooks/useCart";
 import { removeFromDb } from "../../Utilities/FakeDatabase";
 import useStyles from "./ShoppingCart.style";
 
 const ShoppingCart = () => {
   const classes = useStyles();
-  const { handleHit } = useContext(DataProvider);
-  const [AllProducts] = GetAllProducts();
+  const { handleHit, AllProducts } = useContext(DataProvider);
   const [cart, setCart] = useCart(AllProducts);
   const [subtotal, setSubtotal] = useState(0);
-  // console.log(AllProducts, cart);
 
   const handleRemove = (id) => {
     const newCart = cart.filter((product) => product.id !== id);
@@ -28,6 +18,7 @@ const ShoppingCart = () => {
     removeFromDb(id);
     handleHit();
   };
+
   useEffect(() => {
     let sub = 0;
     cart.map((it) => {
@@ -40,11 +31,11 @@ const ShoppingCart = () => {
     <div className={classes.root}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
-          <div style={{ height: "90%", overflow: "auto" }}>
+          <div style={{ height: "65vh", overflow: "auto" }}>
             {cart.map((sItem) => {
               return (
-                <Paper elevation={5} sx={{ mb: 3 }}>
-                  <Grid container spacing={2}>
+                <Paper variant="outlined" sx={{ mb: 3, px: 1, py: 1 }}>
+                  <Grid container spacing={2} style={{ alignItems: "center" }}>
                     <Grid item xs={4} md={4}>
                       <img
                         src={sItem.img}
@@ -53,23 +44,35 @@ const ShoppingCart = () => {
                       />
                     </Grid>
                     <Grid item xs={8} md={8}>
-                      <p style={{ margin: "0px" }}>{sItem.title}</p>
-                      <span>
-                        Price:{sItem.discountPrice} Quantity:
-                        {sItem.orderQuantity}
-                      </span>
-                      <p>Total: {sItem.discountPrice * sItem.orderQuantity}</p>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div>
+                          <p style={{ margin: "0px" }}>{sItem.title}</p>
+                          <span>
+                            {sItem.orderQuantity}x {sItem.discountPrice}
+                          </span>
+                          <p>
+                            Total: {sItem.discountPrice * sItem.orderQuantity}
+                          </p>
+                        </div>
+                        <div>
+                          <Button
+                            variant="outlined"
+                            onClick={() => {
+                              handleRemove(sItem.id);
+                            }}
+                          >
+                            <X size={20} />
+                          </Button>
+                        </div>
+                      </div>
                     </Grid>
                   </Grid>
-                  <Button
-                    variant="contained"
-                    onClick={() => {
-                      handleRemove(sItem.id);
-                    }}
-                  >
-                    Remove
-                  </Button>
-                  <hr />
                 </Paper>
               );
             })}
@@ -78,7 +81,9 @@ const ShoppingCart = () => {
             <h3 style={{ backgroundColor: "white" }}>
               Subtotal : {subtotal}Tk{" "}
             </h3>
-            <Button variant="contained">View Cart</Button>
+            <div style={{ textAlign: "center" }}>
+              <Button variant="contained">View Cart</Button>
+            </div>
           </div>
         </CardContent>
       </Card>

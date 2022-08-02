@@ -8,7 +8,7 @@ const GetAllProducts = () => {
   const getTopTenProducts = async () => {
     try {
       const products = await getFunction(
-        "https://raw.githubusercontent.com/hasibdurjoy/Korean-shop-bangladesh/main/public/Products.json"
+        "https://dry-tundra-71318.herokuapp.com/products"
       );
       setProducts(products.data);
     } catch (error) {

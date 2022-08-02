@@ -22,7 +22,6 @@ const Header = () => {
 
   const [AllProducts] = GetAllProducts();
   const [cart, setCart] = useCart(AllProducts);
-  const obj = {};
 
   useEffect(() => {
     const savedCart = localStorage.getItem("shopping_cart");
@@ -49,6 +48,12 @@ const Header = () => {
             <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
               <Button color="inherit">Home</Button>
             </Link>
+            <Link
+              to="/products"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Button color="inherit">Products</Button>
+            </Link>
 
             <div
               // to="/appointment"
@@ -59,7 +64,7 @@ const Header = () => {
             >
               <Button color="inherit">
                 Cart{" "}
-                <Button variant="contained">
+                <Button variant="contained" style={{ color: "red" }}>
                   ({itemInCart || cart?.length})
                 </Button>
               </Button>

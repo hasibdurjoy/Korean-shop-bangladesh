@@ -32,7 +32,7 @@ const ProductDetailOverview = () => {
     setLoading(true);
     try {
       const products = await getFunction(
-        "https://raw.githubusercontent.com/hasibdurjoy/Korean-shop-bangladesh/main/public/Products.json"
+        "https://dry-tundra-71318.herokuapp.com/products"
       );
       setProduct(products.data.find((p) => p.id == params.productId));
       setLoading(false);
@@ -45,9 +45,9 @@ const ProductDetailOverview = () => {
   const getTopTenProducts = async () => {
     try {
       const products = await getFunction(
-        "https://raw.githubusercontent.com/hasibdurjoy/Korean-shop-bangladesh/main/public/Products.json"
+        "https://dry-tundra-71318.herokuapp.com/products"
       );
-      setTopTenProduct(products.data.slice(0, 10));
+      setTopTenProduct(products.data.slice(0, 5));
     } catch (error) {
       console.log(error);
     }
@@ -68,7 +68,7 @@ const ProductDetailOverview = () => {
     setCart(newCart);
     // save to local storage (for now)
     addToDb(product.id);
-    handleHit();
+    // handleHit();
   };
 
   useEffect(() => {
@@ -110,147 +110,158 @@ const ProductDetailOverview = () => {
   return (
     <Box sx={{ width: "80%", mx: "auto", mt: 3, mb: 5 }}>
       <Paper sx={{ mt: 5, p: 3 }} elevation={15}>
-        {loading && (
-          <Box sx={{ display: "flex" }}>
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              height: "50vh",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <CircularProgress />
           </Box>
-        )}
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
-            <img
-              src={product.img}
-              alt=""
-              style={{ height: "500px", width: "300px" }}
-            />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <h4>{product.title}</h4>
-            <div>
-              <StarRatings
-                rating={product.rating}
-                starRatedColor="#e85d04"
-                starDimension="20px"
-                starSpacing="5px"
+        ) : (
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={4}>
+              <img
+                src={product.img}
+                alt=""
+                style={{ height: "500px", width: "300px" }}
               />
-            </div>
-            <p>Estimate Shipping Time: 7 Days</p>
-            <hr />
-            <Grid
-              container
-              spacing={1}
-              style={{ alignItems: "center", marginTop: "10px" }}
-            >
-              <Grid item xs={3} md={3}>
-                <p>Sold By :</p>
-              </Grid>
-              <Grid item xs={9} md={9}>
-                <h3 style={{ textAlign: "start" }}>Company name</h3>
-              </Grid>
             </Grid>
-            <hr />
-            <Grid
-              container
-              spacing={1}
-              style={{ alignItems: "center", marginTop: "10px" }}
-            >
-              <Grid item xs={3} md={3}>
-                <p>Price :</p>
+            <Grid item xs={12} md={8}>
+              <h4>{product.title}</h4>
+              <div>
+                <StarRatings
+                  rating={product.rating}
+                  starRatedColor="#e85d04"
+                  starDimension="20px"
+                  starSpacing="5px"
+                />
+              </div>
+              <p>Estimate Shipping Time: 7 Days</p>
+              <hr />
+              <Grid
+                container
+                spacing={1}
+                style={{ alignItems: "center", marginTop: "10px" }}
+              >
+                <Grid item xs={3} md={3}>
+                  <p>Sold By :</p>
+                </Grid>
+                <Grid item xs={9} md={9}>
+                  <h3 style={{ textAlign: "start" }}>Company name</h3>
+                </Grid>
               </Grid>
-              <Grid item xs={9} md={9}>
-                <h4
-                  style={{ textDecoration: "line-through", textAlign: "start" }}
-                >
-                  TK {product.price}/{product.quantity}
-                </h4>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={1}
-              style={{ alignItems: "center", marginTop: "10px" }}
-            >
-              <Grid item xs={3} md={3}>
-                <p>Discount Price :</p>
-              </Grid>
-              <Grid item xs={9} md={9}>
-                <h2 style={{ color: "#e85d04" }}>
-                  {product.discountPrice}{" "}
-                  <span style={{ fontSize: "20px", color: "black" }}>
-                    /{product.quantity}
-                  </span>
-                </h2>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={1}
-              style={{ alignItems: "center", marginTop: "10px" }}
-            >
-              <Grid item xs={3} md={3}>
-                <p>Quantity :</p>
-              </Grid>
-              <Grid item xs={9} md={9}>
-                <h4>
-                  <Button
-                    style={{ fontSize: "20px" }}
-                    onClick={() => {
-                      quantity > 1 && setQuantity(quantity - 1);
+              <hr />
+              <Grid
+                container
+                spacing={1}
+                style={{ alignItems: "center", marginTop: "10px" }}
+              >
+                <Grid item xs={3} md={3}>
+                  <p>Price :</p>
+                </Grid>
+                <Grid item xs={9} md={9}>
+                  <h4
+                    style={{
+                      textDecoration: "line-through",
+                      textAlign: "start",
                     }}
                   >
-                    -
-                  </Button>
-                  {quantity}
-                  <Button
-                    style={{ fontSize: "20px" }}
-                    onClick={() => {
-                      quantity < 5 && setQuantity(quantity + 1);
-                    }}
-                  >
-                    +
-                  </Button>
-                </h4>
+                    TK {product.price}/{product.quantity}
+                  </h4>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid
-              container
-              spacing={1}
-              style={{ alignItems: "center", marginTop: "10px" }}
-            >
-              <Grid item xs={3} md={3}>
-                <p>Total :</p>
+              <Grid
+                container
+                spacing={1}
+                style={{ alignItems: "center", marginTop: "10px" }}
+              >
+                <Grid item xs={3} md={3}>
+                  <p>Discount Price :</p>
+                </Grid>
+                <Grid item xs={9} md={9}>
+                  <h2 style={{ color: "#e85d04" }}>
+                    {product.discountPrice}{" "}
+                    <span style={{ fontSize: "20px", color: "black" }}>
+                      /{product.quantity}
+                    </span>
+                  </h2>
+                </Grid>
               </Grid>
-              <Grid item xs={9} md={9}>
-                <h2 style={{ color: "#e85d04" }}>
-                  {product.discountPrice * quantity}
-                </h2>
+              <Grid
+                container
+                spacing={1}
+                style={{ alignItems: "center", marginTop: "10px" }}
+              >
+                <Grid item xs={3} md={3}>
+                  <p>Quantity :</p>
+                </Grid>
+                <Grid item xs={9} md={9}>
+                  <h4>
+                    <Button
+                      style={{ fontSize: "20px" }}
+                      onClick={() => {
+                        quantity > 1 && setQuantity(quantity - 1);
+                      }}
+                    >
+                      -
+                    </Button>
+                    {quantity}
+                    <Button
+                      style={{ fontSize: "20px" }}
+                      onClick={() => {
+                        quantity < 5 && setQuantity(quantity + 1);
+                      }}
+                    >
+                      +
+                    </Button>
+                  </h4>
+                </Grid>
               </Grid>
-            </Grid>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "100px",
-                marginTop: "30px",
-              }}
-            >
-              <Button
-                variant="outlined"
-                style={{ borderColor: "#e85d04", color: "black" }}
-                onClick={() => {
-                  handleAddToCart(product);
+              <Grid
+                container
+                spacing={1}
+                style={{ alignItems: "center", marginTop: "10px" }}
+              >
+                <Grid item xs={3} md={3}>
+                  <p>Total :</p>
+                </Grid>
+                <Grid item xs={9} md={9}>
+                  <h2 style={{ color: "#e85d04" }}>
+                    {product.discountPrice * quantity}
+                  </h2>
+                </Grid>
+              </Grid>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "100px",
+                  marginTop: "30px",
                 }}
               >
-                Add To Cart
-              </Button>
-              <Button
-                variant="contained"
-                style={{ backgroundColor: "#e85d04" }}
-              >
-                Buy Now
-              </Button>
-            </div>
+                <Button
+                  variant="outlined"
+                  style={{ borderColor: "#e85d04", color: "black" }}
+                  onClick={() => {
+                    handleAddToCart(product);
+                  }}
+                >
+                  Add To Cart
+                </Button>
+                <Button
+                  variant="contained"
+                  style={{ backgroundColor: "#e85d04" }}
+                >
+                  Buy Now
+                </Button>
+              </div>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
       </Paper>
       <Grid container spacing={3} sx={{ mt: 5 }}>
         <Grid item xs={12} md={4}>

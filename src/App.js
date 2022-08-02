@@ -9,12 +9,15 @@ import ReturnPolicy from "./Components/PolicyPages/ReturnPolicy";
 import SupportPolicy from "./Components/PolicyPages/SupportPolicy";
 import TermsAndConditions from "./Components/PolicyPages/TermsAndConditions";
 import ProductDetailOverview from "./Components/ProductDetail/ProductDetailOverview";
+import Products from "./Components/Products/Products";
 import Footer from "./Components/Shared/Footer/Footer";
 import Header from "./Components/Shared/Header/Header";
 import AuthProvider from "./context/AuthProvider";
 import { DataProvider } from "./context/DataProvider";
+import GetAllProducts from "./hooks/GetAllProducts";
 
 function App() {
+  const [AllProducts] = GetAllProducts();
   const [hitDb, setHitDb] = useState(0);
   const handleHit = () => {
     setHitDb(hitDb + 1);
@@ -22,13 +25,14 @@ function App() {
 
   return (
     <div>
-      <DataProvider.Provider value={{ handleHit, hitDb }}>
+      <DataProvider.Provider value={{ handleHit, hitDb, AllProducts }}>
         <AuthProvider>
           <Router>
             <Header />
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/products" element={<Products />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/return-policy" element={<ReturnPolicy />} />
               <Route path="/support-policy" element={<SupportPolicy />} />
