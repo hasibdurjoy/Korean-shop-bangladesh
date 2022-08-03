@@ -1,6 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import CartDetails from "./Components/CartDetails/CartDetails";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login/Login";
 import Register from "./Components/Login/Register/Register";
@@ -33,6 +34,7 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
+              <Route path="/cart" element={<CartDetails />} />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/return-policy" element={<ReturnPolicy />} />
               <Route path="/support-policy" element={<SupportPolicy />} />

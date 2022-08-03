@@ -1,12 +1,14 @@
 import { Button, Card, CardContent, Grid, Paper } from "@mui/material";
 import { X } from "phosphor-react";
 import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { DataProvider } from "../../context/DataProvider";
 import useCart from "../../hooks/useCart";
 import { removeFromDb } from "../../Utilities/FakeDatabase";
 import useStyles from "./ShoppingCart.style";
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ handleClose }) => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const { handleHit, AllProducts } = useContext(DataProvider);
   const [cart, setCart] = useCart(AllProducts);
@@ -82,7 +84,17 @@ const ShoppingCart = () => {
               Subtotal : {subtotal}Tk{" "}
             </h3>
             <div style={{ textAlign: "center" }}>
-              <Button variant="contained">View Cart</Button>
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClose();
+                  navigate("/cart");
+                }}
+              >
+                View Cart
+              </Button>
             </div>
           </div>
         </CardContent>

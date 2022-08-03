@@ -104,7 +104,7 @@ const Header = () => {
             alignItems: "center",
           }}
         >
-          <ShoppingCart />
+          <ShoppingCart handleClose={handleClose} />
         </Modal>
       </div>
     </div>
