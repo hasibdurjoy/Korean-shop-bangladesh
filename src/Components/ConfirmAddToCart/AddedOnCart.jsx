@@ -61,7 +61,14 @@ const AddedOnCart = ({ product, quantity, handleClose }) => {
           >
             Back To Shopping
           </Button>
-          <Button variant="contained" style={{ backgroundColor: "#e85d04" }}>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#e85d04" }}
+            onClick={() => {
+              handleClose();
+              navigate("/cart");
+            }}
+          >
             Proceed To Checkout
           </Button>
         </div>
