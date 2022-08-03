@@ -7,7 +7,7 @@ import TopTenSection from "./TopTenSection/TopTenSection";
 
 const Home = () => {
   return (
-    <div>
+    <div style={{ marginTop: "70px" }}>
       <MainBanner />
       <MagnifierOfferCarousel />
       <FeaturedProducts />

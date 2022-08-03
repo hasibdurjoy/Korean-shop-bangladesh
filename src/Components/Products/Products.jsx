@@ -8,7 +8,7 @@ const Products = () => {
   const { handleHit, AllProducts } = useContext(DataProvider);
   console.log(AllProducts);
   return (
-    <Box sx={{ width: "80%", mt: 4, mx: "auto" }}>
+    <Box sx={{ width: "80%", mx: "auto" }} style={{ marginTop: "80px" }}>
       <Grid container spacing={2}>
         <Grid item xs={0} md={2}>
           <h2>content</h2>
