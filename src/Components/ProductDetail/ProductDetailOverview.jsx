@@ -6,6 +6,7 @@ import {
   Tab,
   Tabs,
   Typography,
+  Modal,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
@@ -16,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { DataProvider } from "../../context/DataProvider";
 import useCart from "../../hooks/useCart";
 import { addToDb } from "../../Utilities/FakeDatabase";
+import AddedOnCart from "../ConfirmAddToCart/AddedOnCart";
 
 const ProductDetailOverview = () => {
   const params = useParams();
@@ -27,6 +29,16 @@ const ProductDetailOverview = () => {
   const [product, setProduct] = useState([]);
   const [topTenProduct, setTopTenProduct] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [addedOnCartModalOpen, setAddedOnCartModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
+  const handleAddedOnCartModalOpen = (data) => {
+    setModalData(data);
+    setAddedOnCartModalOpen(true);
+  };
+  const handleAddedOnCartModalState = () => {
+    setAddedOnCartModalOpen(!addedOnCartModalOpen);
+  };
 
   const getProductDetails = async () => {
     setLoading(true);
@@ -248,6 +260,7 @@ const ProductDetailOverview = () => {
                   style={{ borderColor: "#e85d04", color: "black" }}
                   onClick={() => {
                     handleAddToCart(product);
+                    handleAddedOnCartModalOpen(product);
                   }}
                 >
                   Add To Cart
@@ -369,6 +382,23 @@ const ProductDetailOverview = () => {
           </Paper>
         </Grid>
       </Grid>
+      <Modal
+        open={addedOnCartModalOpen}
+        onClose={handleAddedOnCartModalState}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AddedOnCart
+          product={modalData}
+          quantity={quantity}
+          handleClose={handleAddedOnCartModalState}
+        />
+      </Modal>
     </Box>
   );
 };

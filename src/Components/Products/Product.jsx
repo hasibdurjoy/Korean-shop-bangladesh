@@ -1,16 +1,63 @@
-import { Button, Grid, Paper } from "@mui/material";
-import React from "react";
+import { Button, Grid, Modal, Paper } from "@mui/material";
+import React, { useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useNavigate } from "react-router-dom";
+import ConfirmAddToCart from "../ConfirmAddToCart/ConfirmAddToCart";
+import AddedOnCart from "../ConfirmAddToCart/AddedOnCart";
+import useCart from "../../hooks/useCart";
+import { addToDb } from "../../Utilities/FakeDatabase";
 
 const Product = ({ product }) => {
   const navigate = useNavigate();
+  const [cart, setCart] = useCart(product);
+  const [quantity, setQuantity] = useState(0);
+  const [addedOnCartModalOpen, setAddedOnCartModalOpen] = useState(false);
+  const [addedOnCartModalData, setAddedOnCartModalData] = useState({});
+
+  const [addToCartModalOpen, setAddToCartModalOpen] = useState(false);
+  const [addToCartModalData, setAddToCartModalData] = useState({});
+
+  const handleAddToCartModalOpen = (data) => {
+    setAddToCartModalData(data);
+    setAddToCartModalOpen(true);
+  };
+
+  const handleAddToCartModalState = () => {
+    setAddToCartModalOpen(false);
+  };
+
+  const handleAddedOnCartModalState = () => {
+    setAddedOnCartModalOpen(!addedOnCartModalOpen);
+  };
+
+  const handleAddToCart = (product, quantity) => {
+    const exists = cart.find((pd) => pd.id === product.id);
+    let newCart = [];
+    if (exists) {
+      const rest = cart.filter((pd) => pd.id !== product.id);
+      exists.orderQuantity = exists.orderQuantity + 1;
+      newCart = [...rest, product];
+    } else {
+      product.orderQuantity = 1;
+      newCart = [...cart, product];
+    }
+    setCart(newCart);
+    // save to local storage (for now)
+    addToDb(product.id);
+    // handleHit();
+    setAddToCartModalOpen(false);
+    setAddedOnCartModalData(product);
+    setQuantity(quantity);
+    setAddedOnCartModalOpen(true);
+  };
+
   return (
     <Grid item xs={12} md={4}>
       <Paper
         variant="outlined"
         sx={{ p: 2, cursor: "pointer" }}
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           navigate(`/product/${product._id}`);
           window.scrollTo(0, 0);
         }}
@@ -72,9 +119,10 @@ const Product = ({ product }) => {
             fullWidth
             variant="outlined"
             style={{ borderColor: "#e85d04", color: "black" }}
-            /* onClick={() => {
-                    handleAddToCart(product);
-                  }} */
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAddToCartModalOpen(product);
+            }}
           >
             Add To Cart
           </Button>
@@ -87,6 +135,40 @@ const Product = ({ product }) => {
           </Button>
         </div>
       </Paper>
+      <Modal
+        open={addToCartModalOpen}
+        onClose={handleAddedOnCartModalState}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ConfirmAddToCart
+          handleAddToCart={handleAddToCart}
+          product={addToCartModalData}
+          handleClose={handleAddToCartModalState}
+        />
+      </Modal>
+      <Modal
+        open={addedOnCartModalOpen}
+        onClose={handleAddedOnCartModalState}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AddedOnCart
+          product={addedOnCartModalData}
+          quantity={quantity}
+          handleClose={handleAddedOnCartModalState}
+        />
+      </Modal>
     </Grid>
   );
 };
