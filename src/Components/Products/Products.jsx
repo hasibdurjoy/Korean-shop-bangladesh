@@ -5,13 +5,12 @@ import { DataProvider } from "../../context/DataProvider";
 import Product from "./Product";
 
 const Products = () => {
-  const { handleHit, AllProducts } = useContext(DataProvider);
-  console.log(AllProducts);
+  const { AllProducts } = useContext(DataProvider);
   return (
     <Box sx={{ width: "80%", mx: "auto" }} style={{ marginTop: "80px" }}>
       <Grid container spacing={2}>
         <Grid item xs={0} md={2}>
-          <h2>content</h2>
+          <h2>Filter</h2>
         </Grid>
         <Grid item xs={12} md={10}>
           <Grid container spacing={2}>

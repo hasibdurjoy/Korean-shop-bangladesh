@@ -35,6 +35,7 @@ const ProductDetailOverview = () => {
   const handleAddedOnCartModalOpen = (data) => {
     setModalData(data);
     setAddedOnCartModalOpen(true);
+    setQuantity(1);
   };
   const handleAddedOnCartModalState = () => {
     setAddedOnCartModalOpen(!addedOnCartModalOpen);
@@ -71,15 +72,15 @@ const ProductDetailOverview = () => {
     let newCart = [];
     if (exists) {
       const rest = cart.filter((pd) => pd.id !== product.id);
-      exists.orderQuantity = exists.orderQuantity + 1;
+      exists.orderQuantity = exists.orderQuantity + quantity;
       newCart = [...rest, product];
     } else {
-      product.orderQuantity = 1;
+      product.orderQuantity = quantity;
       newCart = [...cart, product];
     }
     setCart(newCart);
     // save to local storage (for now)
-    addToDb(product.id);
+    addToDb(product.id, quantity);
     // handleHit();
   };
 
