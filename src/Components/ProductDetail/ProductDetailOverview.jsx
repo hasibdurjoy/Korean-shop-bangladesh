@@ -32,9 +32,9 @@ const ProductDetailOverview = () => {
     setLoading(true);
     try {
       const products = await getFunction(
-        "https://dry-tundra-71318.herokuapp.com/products"
+        `https://dry-tundra-71318.herokuapp.com/product/${params.productId}`
       );
-      setProduct(products.data.find((p) => p.id == params.productId));
+      setProduct(products.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -45,9 +45,9 @@ const ProductDetailOverview = () => {
   const getTopTenProducts = async () => {
     try {
       const products = await getFunction(
-        "https://dry-tundra-71318.herokuapp.com/products"
+        "https://dry-tundra-71318.herokuapp.com/products/bestSelling"
       );
-      setTopTenProduct(products.data.slice(0, 5));
+      setTopTenProduct(products.data);
     } catch (error) {
       console.log(error);
     }
@@ -274,7 +274,7 @@ const ProductDetailOverview = () => {
                   <Paper
                     key={data.id}
                     onClick={() => {
-                      navigate(`/product/${data.id}`);
+                      navigate(`/product/${data._id}`);
                       window.scrollTo(0, 0);
                     }}
                     variant="outlined"

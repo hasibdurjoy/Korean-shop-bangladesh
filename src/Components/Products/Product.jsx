@@ -11,7 +11,8 @@ const Product = ({ product }) => {
         variant="outlined"
         sx={{ p: 2, cursor: "pointer" }}
         onClick={() => {
-          navigate(`/product/${product.id}`);
+          navigate(`/product/${product._id}`);
+          window.scrollTo(0, 0);
         }}
       >
         <div

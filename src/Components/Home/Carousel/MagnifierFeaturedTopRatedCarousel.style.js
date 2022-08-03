@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginRight: "20px",
     padding: "10px 0",
+    cursor: "pointer",
   },
 
   offCardRoot: {
