@@ -86,8 +86,6 @@ const MagnifierOfferCarousel = () => {
             customTransition="transform 2000ms ease-in-out"
             transitionDuration={2000}
             containerClass="carousel-container"
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            // deviceType={this.props.deviceType}
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
             partialVisible={true}

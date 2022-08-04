@@ -66,7 +66,6 @@ const MainBanner = () => {
       const imgData = await getFunction(
         "https://dry-tundra-71318.herokuapp.com/banners"
       );
-      console.log(imgData);
       setImages(imgData.data);
       setLoading(false);
     } catch (error) {

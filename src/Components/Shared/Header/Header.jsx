@@ -15,11 +15,12 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import { Modal } from "@mui/material";
+import { Avatar, Badge, Menu, MenuItem, Modal, Tooltip } from "@mui/material";
 import ShoppingCart from "../../ShoppingCart/ShoppingCart";
 import GetAllProducts from "../../../hooks/GetAllProducts";
 import useCart from "../../../hooks/useCart";
 import { DataProvider } from "../../../context/DataProvider";
+import { ShoppingCartSimple } from "phosphor-react";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
@@ -38,6 +39,24 @@ function Header(props) {
     const savedCart = localStorage.getItem("shopping_cart");
     savedCart && setItemInCart(Object.keys(JSON.parse(savedCart)).length);
   }, [hitDb]);
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -148,26 +167,38 @@ function Header(props) {
               onClick={() => {
                 setOpen(true);
               }}
-              style={{ textDecoration: "none", color: "white" }}
+              style={{
+                textDecoration: "none",
+                color: "white",
+                marginRight: "20px",
+              }}
             >
-              <Button color="inherit">
+              <Badge
+                badgeContent={itemInCart || cart?.length}
+                color="secondary"
+              >
+                <ShoppingCartSimple size={25} />
+              </Badge>
+              {/* <Button color="inherit">
                 Cart{" "}
                 <Button variant="contained" style={{ color: "red" }}>
                   ({itemInCart || cart?.length})
                 </Button>
-              </Button>
+              </Button> */}
             </span>
             {user?.email ? (
               <span>
-                <NavLink
-                  style={{ textDecoration: "none", color: "white" }}
-                  to="/dashboard"
-                >
-                  <Button color="inherit">Dashboard</Button>
-                </NavLink>
-                <Button onClick={logOut} color="inherit">
-                  Logout
-                </Button>
+                <>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      {user.photoURL ? (
+                        <Avatar src={user.photoURL} />
+                      ) : (
+                        <Avatar>{user?.displayName?.slice()[0]}</Avatar>
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </>
               </span>
             ) : (
               <NavLink
@@ -200,6 +231,35 @@ function Header(props) {
           {drawer}
         </Drawer>
       </Box>
+      <Menu
+        sx={{ mt: "45px" }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Typography textAlign="center">Profile</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Typography textAlign="center">Track Orders</Typography>
+        </MenuItem>
+        <MenuItem onClick={handleCloseUserMenu}>
+          <Typography textAlign="center">History</Typography>
+        </MenuItem>
+        <MenuItem onClick={logOut}>
+          <Typography textAlign="center">Logout</Typography>
+        </MenuItem>
+      </Menu>
       <div>
         <Modal
           open={open}
