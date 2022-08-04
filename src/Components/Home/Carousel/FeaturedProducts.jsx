@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
   return (
     <Box
       className={classes.root}
-      sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
+      sx={{ flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
     >
       {loading ? (
         <Box

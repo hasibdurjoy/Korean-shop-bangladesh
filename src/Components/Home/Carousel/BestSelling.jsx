@@ -33,10 +33,7 @@ const BestSelling = () => {
   }, []);
 
   return (
-    <Box
-      className={classes.root}
-      sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
-    >
+    <Box className="root" sx={{ flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}>
       {loading ? (
         <Box
           sx={{

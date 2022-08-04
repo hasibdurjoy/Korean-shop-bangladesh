@@ -71,10 +71,7 @@ const TopTenSection = () => {
   ];
 
   return (
-    <Box
-      className={classes.root}
-      sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
-    >
+    <Box className="root" sx={{ flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
           <div sx={{ p: 3, borderRadius: "20px" }}>

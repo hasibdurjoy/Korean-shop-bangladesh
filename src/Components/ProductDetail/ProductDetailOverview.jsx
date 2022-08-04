@@ -121,7 +121,7 @@ const ProductDetailOverview = () => {
   }
 
   return (
-    <Box sx={{ width: "80%", mx: "auto", mt: "80px", mb: 5 }}>
+    <Box sx={{ mx: "auto", mt: "80px", mb: 5 }} className="root">
       <Paper sx={{ mt: 5, p: 3 }} elevation={15}>
         {loading ? (
           <Box

@@ -7,7 +7,7 @@ import Product from "./Product";
 const Products = () => {
   const { AllProducts } = useContext(DataProvider);
   return (
-    <Box sx={{ width: "80%", mx: "auto" }} style={{ marginTop: "80px" }}>
+    <Box sx={{ mx: "auto" }} style={{ marginTop: "80px" }} className="root">
       <Grid container spacing={2}>
         <Grid item xs={0} md={2}>
           <h2>Filter</h2>

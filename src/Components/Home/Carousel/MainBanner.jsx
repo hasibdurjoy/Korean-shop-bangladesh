@@ -79,7 +79,7 @@ const MainBanner = () => {
   }, []);
 
   return (
-    <Box sx={{ maxWidth: "80%", flexGrow: 1, mx: "auto", mt: 2 }}>
+    <Box sx={{ flexGrow: 1, mx: "auto", mt: 2 }} className="root">
       {loading ? (
         <Box
           sx={{
