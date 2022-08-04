@@ -95,14 +95,18 @@ function Header(props) {
               onClick={() => {
                 setOpen(true);
               }}
-              style={{ textDecoration: "none", color: "black" }}
+              style={{
+                textDecoration: "none",
+                color: "white",
+                marginRight: "20px",
+              }}
             >
-              <Button color="inherit">
-                Cart{" "}
-                <Button variant="contained" style={{ color: "red" }}>
-                  ({itemInCart || cart?.length})
-                </Button>
-              </Button>
+              <Badge
+                badgeContent={itemInCart || cart?.length}
+                color="secondary"
+              >
+                <ShoppingCartSimple size={25} style={{ color: "black" }} />
+              </Badge>
             </span>
           </ListItemButton>
         </ListItem>
@@ -110,19 +114,21 @@ function Header(props) {
           <ListItemButton sx={{ textAlign: "center" }}>
             {user?.email ? (
               <span>
-                <NavLink
-                  style={{ textDecoration: "none", color: "black" }}
-                  to="/dashboard"
-                >
-                  <Button color="inherit">Dashboard</Button>
-                </NavLink>
-                <Button onClick={logOut} color="inherit">
-                  Logout
-                </Button>
+                <>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      {user.photoURL ? (
+                        <Avatar src={user.photoURL} />
+                      ) : (
+                        <Avatar>{user?.displayName?.slice()[0]}</Avatar>
+                      )}
+                    </IconButton>
+                  </Tooltip>
+                </>
               </span>
             ) : (
               <NavLink
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "white" }}
                 to="/login"
               >
                 <Button color="inherit">Login</Button>
@@ -151,7 +157,33 @@ function Header(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Korean Shop Bangladesh
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <Box>Korean Shop Bangladesh</Box>
+              <Box sx={{ display: { xs: "block", sm: "none" } }}>
+                {user?.email ? (
+                  <span>
+                    <>
+                      <Tooltip title="Open settings">
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                          {user.photoURL ? (
+                            <Avatar src={user.photoURL} />
+                          ) : (
+                            <Avatar>{user?.displayName?.slice()[0]}</Avatar>
+                          )}
+                        </IconButton>
+                      </Tooltip>
+                    </>
+                  </span>
+                ) : (
+                  <NavLink
+                    style={{ textDecoration: "none", color: "white" }}
+                    to="/login"
+                  >
+                    <Button color="inherit">Login</Button>
+                  </NavLink>
+                )}
+              </Box>
+            </div>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
@@ -179,12 +211,6 @@ function Header(props) {
               >
                 <ShoppingCartSimple size={25} />
               </Badge>
-              {/* <Button color="inherit">
-                Cart{" "}
-                <Button variant="contained" style={{ color: "red" }}>
-                  ({itemInCart || cart?.length})
-                </Button>
-              </Button> */}
             </span>
             {user?.email ? (
               <span>
