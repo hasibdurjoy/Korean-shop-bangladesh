@@ -9,17 +9,11 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     color: "black",
     backgroundColor: "black",
-    height: "80vh",
     padding: "20px 0px",
     overflowY: "auto",
   },
   cardContent: {
-    padding: "30px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "space-between",
-    height: "80vh",
+    padding: "10px 30px",
   },
 }));
 

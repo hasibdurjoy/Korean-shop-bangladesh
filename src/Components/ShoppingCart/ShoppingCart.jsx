@@ -33,6 +33,22 @@ const ShoppingCart = ({ handleClose }) => {
     <div className={classes.root}>
       <Card className={classes.card}>
         <CardContent className={classes.cardContent}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginBottom: "10px",
+            }}
+          >
+            <Button
+              variant="outlined"
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              <X size={20} />
+            </Button>
+          </div>
           <div style={{ height: "65vh", overflow: "auto" }}>
             {cart.map((sItem) => {
               return (
