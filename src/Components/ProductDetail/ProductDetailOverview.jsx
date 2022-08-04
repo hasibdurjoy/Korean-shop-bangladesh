@@ -136,14 +136,14 @@ const ProductDetailOverview = () => {
           </Box>
         ) : (
           <Grid container spacing={3}>
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={5}>
               <img
                 src={product.img}
                 alt=""
-                style={{ height: "500px", width: "300px" }}
+                style={{ height: "500px", width: "100%", borderRadius: "20px" }}
               />
             </Grid>
-            <Grid item xs={12} md={8}>
+            <Grid item xs={12} md={7}>
               <h4>{product.title}</h4>
               <div>
                 <StarRatings

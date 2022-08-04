@@ -26,14 +26,14 @@ const ConfirmAddToCart = ({ product, handleAddToCart, handleClose }) => {
           </Button>
         </div>
         <Grid container spacing={5} style={{ alignItems: "center" }}>
-          <Grid item xs={12} md={4}>
+          <Grid item xs={4} md={4}>
             <img
               src={product.img}
               alt=""
-              style={{ height: "400px", width: "300px" }}
+              style={{ height: "100%", width: "100%" }}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={8} md={8}>
             <h4>{product.title}</h4>
             <div>
               <StarRatings
@@ -43,7 +43,6 @@ const ConfirmAddToCart = ({ product, handleAddToCart, handleClose }) => {
                 starSpacing="5px"
               />
             </div>
-            <p>Estimate Shipping Time: 7 Days</p>
             <hr />
             <Grid
               container

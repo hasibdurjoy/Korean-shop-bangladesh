@@ -26,7 +26,7 @@ const AddedOnCart = ({ product, quantity, handleClose }) => {
         </div>
         <h2>Item Added To Cart!!</h2>
         <Paper variant="outlined" style={{ padding: "5px" }}>
-          <Grid container spacing={2} style={{ alignItems: "center" }}>
+          <Grid container spacing={4} style={{ alignItems: "center" }}>
             <Grid item xs={3} md={3}>
               <img
                 src={product.img}
@@ -34,7 +34,7 @@ const AddedOnCart = ({ product, quantity, handleClose }) => {
                 style={{ height: "100px", width: "100px" }}
               />
             </Grid>
-            <Grid item xs={3} md={8}>
+            <Grid item xs={8} md={8}>
               <h6>{product.title}</h6>
               <p>
                 {product.discountPrice}x{quantity}
@@ -47,11 +47,12 @@ const AddedOnCart = ({ product, quantity, handleClose }) => {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "100px",
+            gap: "10px",
             marginTop: "30px",
           }}
         >
           <Button
+            fullWidth
             variant="outlined"
             style={{ borderColor: "#e85d04", color: "black" }}
             onClick={() => {
@@ -62,6 +63,7 @@ const AddedOnCart = ({ product, quantity, handleClose }) => {
             Back To Shopping
           </Button>
           <Button
+            fullWidth
             variant="contained"
             style={{ backgroundColor: "#e85d04" }}
             onClick={() => {
