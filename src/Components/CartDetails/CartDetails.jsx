@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Modal } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import GetAllProducts from "../../hooks/GetAllProducts";
 import useCart from "../../hooks/useCart";
 import { removeFromDb } from "../../Utilities/FakeDatabase";
+import ConfirmOrderModal from "../ConfirmOrderModal/ConfirmOrderModal";
 
 import SingleCartItem from "./SingleCartItem";
 
@@ -22,6 +23,10 @@ const CartDetails = () => {
   const [cart, setCart] = useCart(AllProducts);
 
   const [subtotal, setSubtotal] = useState(0);
+
+  const [openConfirmOrder, setOpenConfirmOrder] = React.useState(false);
+  const handleConfirmOrderOpen = () => setOpenConfirmOrder(true);
+  const handleConfirmOrderClose = () => setOpenConfirmOrder(false);
 
   const handleRemove = (id) => {
     const newCart = cart.filter((product) => product.id !== id);
@@ -107,12 +112,38 @@ const CartDetails = () => {
             >
               Back To Shopping
             </Button>
-            <Button variant="contained" style={{ backgroundColor: "#e85d04" }}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "#e85d04" }}
+              onClick={() => {
+                handleConfirmOrderOpen();
+              }}
+            >
               Proceed To Checkout
             </Button>
           </div>
         </div>
       </Paper>
+      <div>
+        <Modal
+          open={openConfirmOrder}
+          onClose={handleConfirmOrderClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ConfirmOrderModal
+            cart={cart}
+            subtotal={subtotal}
+            handleConfirmOrderClose={handleConfirmOrderClose}
+            handleConfirmOrderOpen={handleConfirmOrderOpen}
+          />
+        </Modal>
+      </div>
     </Box>
   );
 };

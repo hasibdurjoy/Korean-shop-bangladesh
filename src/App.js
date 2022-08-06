@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CartDetails from "./Components/CartDetails/CartDetails";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login/Login";
+import PrivateRoute from "./Components/Login/PrivateRoute/PrivateRoute";
 import Register from "./Components/Login/Register/Register";
 import PrivacyPolicy from "./Components/PolicyPages/PrivacyPolicy";
 import ReturnPolicy from "./Components/PolicyPages/ReturnPolicy";
@@ -34,7 +35,14 @@ function App() {
               <Route exact path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
               <Route path="/products" element={<Products />} />
-              <Route path="/cart" element={<CartDetails />} />
+              <Route
+                path="/cart"
+                element={
+                  <PrivateRoute>
+                    <CartDetails />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/terms" element={<TermsAndConditions />} />
               <Route path="/return-policy" element={<ReturnPolicy />} />
               <Route path="/support-policy" element={<SupportPolicy />} />

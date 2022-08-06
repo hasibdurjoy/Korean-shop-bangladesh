@@ -1,14 +1,16 @@
 import { Button, Grid, Modal, Paper } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useNavigate } from "react-router-dom";
 import ConfirmAddToCart from "../ConfirmAddToCart/ConfirmAddToCart";
 import AddedOnCart from "../ConfirmAddToCart/AddedOnCart";
 import useCart from "../../hooks/useCart";
 import { addToDb } from "../../Utilities/FakeDatabase";
+import { DataProvider } from "../../context/DataProvider";
 
 const Product = ({ product }) => {
   const navigate = useNavigate();
+  const { handleHit } = useContext(DataProvider);
   const [cart, setCart] = useCart(product);
   const [quantity, setQuantity] = useState(0);
   const [addedOnCartModalOpen, setAddedOnCartModalOpen] = useState(false);
@@ -44,11 +46,11 @@ const Product = ({ product }) => {
     setCart(newCart);
     // save to local storage (for now)
     addToDb(product.id, quantity);
-    // handleHit();
     setAddToCartModalOpen(false);
     setAddedOnCartModalData(product);
     setQuantity(quantity);
     setAddedOnCartModalOpen(true);
+    handleHit();
   };
 
   return (

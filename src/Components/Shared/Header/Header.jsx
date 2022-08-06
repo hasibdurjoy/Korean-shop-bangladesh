@@ -23,7 +23,6 @@ import { DataProvider } from "../../../context/DataProvider";
 import { ShoppingCartSimple } from "phosphor-react";
 
 const drawerWidth = 240;
-const navItems = ["Home", "About", "Contact"];
 
 function Header(props) {
   const { user, logOut } = useAuth();
