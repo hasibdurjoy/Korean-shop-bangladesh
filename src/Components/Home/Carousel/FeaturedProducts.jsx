@@ -33,10 +33,7 @@ const FeaturedProducts = () => {
   }, []);
 
   return (
-    <Box
-      className={classes.root}
-      sx={{ flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}
-    >
+    <Box className="root" sx={{ flexGrow: 1, mx: "auto", mt: 2, mb: 7 }}>
       {loading ? (
         <Box
           sx={{
@@ -137,7 +134,7 @@ const FeaturedProducts = () => {
                         </span>
                       )}
                       <StarRatings
-                        rating={data.rating}
+                        rating={parseInt(data.rating)}
                         starRatedColor="#e85d04"
                         starDimension="20px"
                         starSpacing="5px"

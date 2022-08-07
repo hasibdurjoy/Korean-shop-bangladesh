@@ -311,7 +311,7 @@ const ProductDetailOverview = () => {
                       <Grid item xs={8} md={8}>
                         <h6>{data.title}</h6>
                         <StarRatings
-                          rating={data.rating}
+                          rating={parseInt(data.rating)}
                           starRatedColor="#e85d04"
                           starDimension="20px"
                           starSpacing="5px"
@@ -357,24 +357,30 @@ const ProductDetailOverview = () => {
               <TabPanel value={value} index={0}>
                 <h6>{product.description}</h6>
               </TabPanel>
-              <TabPanel value={value} index={1}>
-                {product?.review?.map((review) => {
-                  return (
-                    <Paper elevation={15} sx={{ p: 4, mb: 3 }}>
-                      <h2>{review.name}</h2>
-                      <div>
-                        <StarRatings
-                          rating={review.review}
-                          starRatedColor="#e85d04"
-                          starDimension="20px"
-                          starSpacing="5px"
-                        />
-                      </div>
-                      <h6>{review.description}</h6>
-                    </Paper>
-                  );
-                })}
-              </TabPanel>
+              {product?.review ? (
+                <TabPanel value={value} index={1}>
+                  {product?.review?.map((review) => {
+                    return (
+                      <Paper elevation={15} sx={{ p: 4, mb: 3 }}>
+                        <h2>{review.name}</h2>
+                        <div>
+                          <StarRatings
+                            rating={review?.review || 0}
+                            starRatedColor="#e85d04"
+                            starDimension="20px"
+                            starSpacing="5px"
+                          />
+                        </div>
+                        <h6>{review.description}</h6>
+                      </Paper>
+                    );
+                  })}
+                </TabPanel>
+              ) : (
+                <TabPanel value={value} index={1}>
+                  <h2>No Review Available</h2>
+                </TabPanel>
+              )}
             </Box>
           </Paper>
           <Paper sx={{ p: 3, mt: 3 }} elevation={10}>

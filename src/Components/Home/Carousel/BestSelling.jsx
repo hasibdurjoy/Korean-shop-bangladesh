@@ -100,7 +100,10 @@ const BestSelling = () => {
                     <div className={classes.offCardRoot}>
                       OFF
                       <span className={classes.offPercentButton}>
-                        {data.off}%
+                        {Math.floor(
+                          ((data.price - data.discountPrice) / data.price) * 100
+                        )}
+                        %
                       </span>
                     </div>
                     <img
@@ -134,7 +137,7 @@ const BestSelling = () => {
                         </span>
                       )}
                       <StarRatings
-                        rating={data.rating}
+                        rating={parseInt(data.rating)}
                         starRatedColor="#e85d04"
                         starDimension="20px"
                         starSpacing="5px"

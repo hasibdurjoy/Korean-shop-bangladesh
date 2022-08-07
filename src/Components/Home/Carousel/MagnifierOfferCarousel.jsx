@@ -140,7 +140,7 @@ const MagnifierOfferCarousel = () => {
                         </span>
                       )}
                       <StarRatings
-                        rating={data.rating}
+                        rating={parseInt(data.rating)}
                         starRatedColor="#e85d04"
                         starDimension="20px"
                         starSpacing="5px"
