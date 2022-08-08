@@ -7,7 +7,7 @@ const ConfirmAddToCart = ({ product, handleAddToCart, handleClose }) => {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div>
+    <div style={{ width: "600px" }}>
       <Paper sx={{ mt: 5, p: 3 }} elevation={15}>
         <div
           style={{
@@ -26,18 +26,18 @@ const ConfirmAddToCart = ({ product, handleAddToCart, handleClose }) => {
           </Button>
         </div>
         <Grid container spacing={5} style={{ alignItems: "center" }}>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={3} md={3}>
             <img
               src={product.img}
               alt=""
               style={{ height: "100%", width: "100%" }}
             />
           </Grid>
-          <Grid item xs={8} md={8}>
+          <Grid item xs={9} md={9}>
             <h4>{product.title}</h4>
             <div>
               <StarRatings
-                rating={product.rating}
+                rating={parseInt(product.rating)}
                 starRatedColor="#e85d04"
                 starDimension="20px"
                 starSpacing="5px"

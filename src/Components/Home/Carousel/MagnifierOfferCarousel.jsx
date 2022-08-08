@@ -106,7 +106,10 @@ const MagnifierOfferCarousel = () => {
                     <div className={classes.offCardRoot}>
                       OFF
                       <span className={classes.offPercentButton}>
-                        {data.off}%
+                        {Math.floor(
+                          ((data.price - data.discountPrice) / data.price) * 100
+                        )}
+                        %
                       </span>
                     </div>
                     <img

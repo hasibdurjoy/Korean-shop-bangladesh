@@ -62,6 +62,9 @@ const FeaturedProducts = () => {
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#e85d04" }}
+                onClick={() => {
+                  navigate("/products");
+                }}
               >
                 View All Products
               </Button>
@@ -100,7 +103,10 @@ const FeaturedProducts = () => {
                     <div className={classes.offCardRoot}>
                       OFF
                       <span className={classes.offPercentButton}>
-                        {data.off}%
+                        {Math.floor(
+                          ((data.price - data.discountPrice) / data.price) * 100
+                        )}
+                        %
                       </span>
                     </div>
                     <img

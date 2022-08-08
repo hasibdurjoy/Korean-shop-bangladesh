@@ -40,6 +40,10 @@ const Product = ({ product }) => {
       exists.orderQuantity = exists.orderQuantity + quantity;
       newCart = [...rest, product];
     } else {
+      delete product.description;
+      delete product.review;
+      delete product.specialCategory;
+      delete product.type;
       product.orderQuantity = quantity;
       newCart = [...cart, product];
     }
@@ -80,7 +84,7 @@ const Product = ({ product }) => {
         <hr />
         <h6>{product.title}</h6>
         <StarRatings
-          rating={product.rating}
+          rating={parseInt(product.rating)}
           starRatedColor="#e85d04"
           starDimension="20px"
           starSpacing="5px"

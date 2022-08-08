@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import initializeFirebase from "../firebase/firebase.init";
+import { postFunction, updateFunction } from "../Api/CallApis";
 
 initializeFirebase();
 
@@ -74,7 +75,7 @@ const useFirebase = () => {
         const user = result.user;
         console.log(user);
         setAuthError("");
-        // saveUser(user.email, user.displayName, "PUT");
+        saveUser(user.email, user.displayName, "PUT");
         const destination = location?.state?.from || "/";
         navigate(destination);
       })
@@ -121,15 +122,25 @@ const useFirebase = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const saveUser = (email, displayName, method) => {
+  const saveUser = async (email, displayName, method) => {
     const user = { email, displayName };
-    fetch("https://salty-ravine-02871.herokuapp.com/users", {
-      method: method,
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    }).then();
+    try {
+      if (method === "PUT") {
+        const res = await updateFunction(
+          "https://dry-tundra-71318.herokuapp.com/users",
+          user
+        );
+        console.log("edited");
+      } else {
+        const res = await postFunction(
+          "https://dry-tundra-71318.herokuapp.com/users",
+          user
+        );
+        console.log("added");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return {
     user,

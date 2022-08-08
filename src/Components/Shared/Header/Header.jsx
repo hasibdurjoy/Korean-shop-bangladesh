@@ -272,16 +272,21 @@ function Header(props) {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={handleCloseUserMenu}>
+        <MenuItem>
           <Typography textAlign="center">Profile</Typography>
         </MenuItem>
-        <MenuItem onClick={handleCloseUserMenu}>
+        <MenuItem>
           <Typography textAlign="center">Track Orders</Typography>
         </MenuItem>
-        <MenuItem onClick={handleCloseUserMenu}>
+        <MenuItem>
           <Typography textAlign="center">History</Typography>
         </MenuItem>
-        <MenuItem onClick={logOut}>
+        <MenuItem
+          onClick={() => {
+            logOut();
+            handleCloseUserMenu();
+          }}
+        >
           <Typography textAlign="center">Logout</Typography>
         </MenuItem>
       </Menu>

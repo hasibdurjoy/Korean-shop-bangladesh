@@ -16,7 +16,11 @@ const Products = () => {
   }, [AllProducts]);
 
   return (
-    <Box sx={{ mx: "auto" }} style={{ marginTop: "80px" }} className="root">
+    <Box
+      sx={{ mx: "auto", mb: 3 }}
+      style={{ marginTop: "80px" }}
+      className="root"
+    >
       {loading ? (
         <Box
           sx={{

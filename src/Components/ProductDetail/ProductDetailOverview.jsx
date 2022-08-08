@@ -75,6 +75,10 @@ const ProductDetailOverview = () => {
       exists.orderQuantity = exists.orderQuantity + quantity;
       newCart = [...rest, product];
     } else {
+      delete product.description;
+      delete product.review;
+      delete product.specialCategory;
+      delete product.type;
       product.orderQuantity = quantity;
       newCart = [...cart, product];
     }
@@ -147,7 +151,7 @@ const ProductDetailOverview = () => {
               <h4>{product.title}</h4>
               <div>
                 <StarRatings
-                  rating={product.rating}
+                  rating={parseInt(product.rating)}
                   starRatedColor="#e85d04"
                   starDimension="20px"
                   starSpacing="5px"
@@ -365,7 +369,7 @@ const ProductDetailOverview = () => {
                         <h2>{review.name}</h2>
                         <div>
                           <StarRatings
-                            rating={review?.review || 0}
+                            rating={parseInt(review?.review) || 0}
                             starRatedColor="#e85d04"
                             starDimension="20px"
                             starSpacing="5px"
